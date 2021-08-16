@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+    var pictureList = [
+    "login.png",
+    "d.jpg",
+    "http://lorempixel.com/400/200/sports/2",
+    "http://lorempixel.com/400/200/sports/3",
+    "http://lorempixel.com/400/200/sports/1",
+    "http://lorempixel.com/400/200/sports/5", 
+    "http://lorempixel.com/400/200/sports/6",
+    "http://lorempixel.com/400/200/sports/7",
+    "http://lorempixel.com/400/200/sports/8",];
+
+    $('#picDD').change(function () {
+      var eventTypeName = $("#picDD option:selected");
+      var val = parseInt($('#picDD').val());
+      $("img[id=team1_logo]").attr("src", pictureList[val]);
+      $("#team-name-1").text(eventTypeName.text().toUpperCase());
+    });
+
+    $('#pic2DD').change(function () {
+      var val = parseInt($('#pic2DD').val());
+      var eventTypeName = $("#pic2DD option:selected");
+      $("img[id=team2_logo]").attr("src", pictureList[val]);
+      $("#team-name-2").text(eventTypeName.text().toUpperCase());
+    });
+  });
+
+  function change_target(){
+    var tvalue = document.getElementById("target").value;
+    document.getElementById("league-target").innerHTML = "Target - " + tvalue;
+  }
+
+  function change_league(){
+    document.getElementById("target").value = "";
+    document.getElementById("league-target").innerHTML = "HPL Season 5 - 2021";
+  }
+
+  function change_score(){
+    document.getElementById("over-ball").innerHTML = "Ov " + document.getElementById("over").value + "." + document.getElementById("ball").value;
+    document.getElementById("total-run").innerHTML = document.getElementById("run").value;
+    document.getElementById("wicket").innerHTML = "/" + document.getElementById("wick").value;
+  }
+
+  function change_color(){
+    document.getElementById("ov0").style.backgroundColor = 'green';
+    document.getElementById("ov1").style.backgroundColor = 'green';
+    document.getElementById("ov2").style.backgroundColor = 'green';
+    document.getElementById("ov3").style.backgroundColor = 'green';
+    document.getElementById("ov4").style.backgroundColor = 'green';
+    document.getElementById("ov5").style.backgroundColor = 'green';
+    document.getElementById("ov6").style.backgroundColor = 'green';
+
+    document.getElementById("b0").style.backgroundColor = 'green';
+    document.getElementById("b1").style.backgroundColor = 'green';
+    document.getElementById("b2").style.backgroundColor = 'green';
+    document.getElementById("b3").style.backgroundColor = 'green';
+    document.getElementById("b4").style.backgroundColor = 'green';
+    document.getElementById("b5").style.backgroundColor = 'green';
+
+    document.getElementById("w0").style.backgroundColor = 'green';
+    document.getElementById("w1").style.backgroundColor = 'green';
+    document.getElementById("w2").style.backgroundColor = 'green';
+    document.getElementById("w3").style.backgroundColor = 'green';
+    document.getElementById("w4").style.backgroundColor = 'green';
+    document.getElementById("w5").style.backgroundColor = 'green';
+    document.getElementById("w6").style.backgroundColor = 'green';
+    document.getElementById("w7").style.backgroundColor = 'green';
+    document.getElementById("w8").style.backgroundColor = 'green';
+    document.getElementById("w9").style.backgroundColor = 'green';
+    document.getElementById("w10").style.backgroundColor = 'green';
+  }
+
+  function reset_score(){
+    document.getElementById("ball").value = "0";
+    document.getElementById("run").value = "000";
+    document.getElementById("wick").value = "0";
+    document.getElementById("over").value = "0";
+    change_score();
+    change_color();
+  }
+
+  function change_abb(){
+    if (document.getElementById("team1-bat").checked == true) {
+      document.getElementById("team-abb").innerHTML = document.getElementById("team-name-1").innerHTML.substring(0, 3) + "\u2003" + "\u2003";
+    }
+    else {
+      document.getElementById("team-abb").innerHTML = document.getElementById("team-name-2").innerHTML.substring(0, 3) + "\u2003" + "\u2003";
+    }
+  }
+
+  function select_over(ob, over) {
+    ob.style.backgroundColor = 'red';
+    document.getElementById("over").value = over;
+  }
+
+  function select_ball(ob, ball) {
+    ob.style.backgroundColor = 'red';
+    document.getElementById("ball").value = ball;
+    if (ball == "0") {
+    document.getElementById("b1").style.backgroundColor = 'green';
+    document.getElementById("b2").style.backgroundColor = 'green';
+    document.getElementById("b3").style.backgroundColor = 'green';
+    document.getElementById("b4").style.backgroundColor = 'green';
+    document.getElementById("b5").style.backgroundColor = 'green';
+    }
+  }
+
+  function select_wick(ob, wick) {
+    ob.style.backgroundColor = 'red';
+    document.getElementById("wick").value = wick;
+  }
+  </script>
+  <title>Cricket Score Board</title>
+</head>
+<body>
+<!--
+  <div class="header">
+    <h1>Cricket Score Board <br> Full CSS Design</h1>
+  </div> -->
+<div style="width: 100%; display: inline-block;">
+  <div id="container">
+    <div class="left-board">
+      <div class="team1-logo">
+        <img id="team1_logo" src="login.png" width="80%" height="80%" class="img">
+      </div>
+    </div>
+    <div class="middle-container">
+      <div class="team-name1">
+      <p id="team-name-1">LOCKED</p>
+      </div>
+      <div class="middle-board">
+        <table align="center" cellspacing="0" style="height: 100%; width: 80%; border-spacing: 0; border-collapse: collapse;">
+          <tr>
+            <td style="vertical-align: top; height: 50%; padding:0px;">
+            <div class="over-container">
+              <div class="score-container">
+              <div class="main-score">
+              <p id="team-abb" style="font-family:verdana; color: white; float: left;">LOC&emsp;&emsp;</p>
+              <p id="total-run" style="font-family:verdana; color: white; float: left;">000</p>
+              <p id="wicket" style="font-family:verdana; color: white; float: left;">/0</p>
+              </div>
+              </div>
+              <div class="over">
+              <p id="over-ball" style="font-family:verdana; color: white;">Ov 0.0</p>
+              </div>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="vertical-align: top; height: 50%; padding:0px;">
+            <p id="league-target" style="font-family:verdana; color: white; font-size: 90%;">HPL Season 5 - 2021</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="team-name2">
+      <p id="team-name-2">LOCKED</p>
+      </div>
+    </div>
+    <div class="right-board">
+      <div class="team2-logo">
+        <img id="team2_logo" src="login.png" width="80%" height="80%" class="img">
+      </div>
+    </div>
+  </div>
+
+<!---------- Controller starting   ----------------->
+<div id="controller">
+<table>
+<tr>
+<td style="padding: 15px;">
+Team 1:
+</td>
+<td style="padding: 15px;">
+<select id="picDD">
+    <option value="0" selected>Locked</option>
+    <option value="1">Joi Maa Tara</option>
+    <option value="2">Kushal Knights</option>
+    <option value="3">Golden Eagle</option>
+    <option value="4">Mighty Tornadoes</option>
+    <option value="5">Arya XI</option>
+    <option value="6">Saheb XI</option>
+    <option value="7">XXX XI</option>
+    <option value="8">YYY XI</option>
+</select>
+</td>
+<td style="padding: 15px;">
+Batting
+</td>
+<td style="padding: 15px;">
+<input type="radio" id="team1-bat" name="bat" onclick="change_abb()">
+</td>
+</tr>
+<tr>
+<td style="padding: 15px;">
+Team 2:
+</td>
+<td style="padding: 15px;">
+<select id="pic2DD">
+    <option value="0" selected>Locked</option>
+    <option value="1">Joi Maa Tara</option>
+    <option value="2">Kushal Knights</option>
+    <option value="3">Golden Eagle</option>
+    <option value="4">Mighty Tornadoes</option>
+    <option value="5">Arya XI</option>
+    <option value="6">Saheb XI</option>
+    <option value="7">XXX XI</option>
+    <option value="8">YYY XI</option>
+</select>
+</td>
+<td style="padding: 15px;">
+Batting
+</td>
+<td style="padding: 15px;">
+<input type="radio" id="team2-bat" name="bat"  onclick="change_abb()">
+</td>
+</tr>
+<tr>
+<td style="padding: 15px;">
+Run:
+</td>
+<td style="padding: 15px;">
+<input type="text" id="run" name="run" value="000">
+</td>
+
+<td style="padding: 15px;">
+Over:
+</td>
+<td style="padding: 15px; width: 100px">
+<!--
+<select id="overDD">
+    <option value="0" selected>0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+</select>
+-->
+
+<div class="panel" id="ov0" onclick='select_over(this, "0");'>0</div>
+<div class="panel" id="ov1" onclick='select_over(this, "1");'>1</div>
+<div class="panel" id="ov2" onclick='select_over(this, "2");'>2</div></br>
+<div class="panel" id="ov3" onclick='select_over(this, "3");'>3</div>
+<div class="panel" id="ov4" onclick='select_over(this, "4");'>4</div>
+<div class="panel" id="ov5" onclick='select_over(this, "5");'>5</div></br>
+<div class="panel" id="ov6" onclick='select_over(this, "6");'>6</div>
+<input type="text" id="over" name="over" value="0" style="width: 30px; visibility: hidden;">
+</td>
+
+<td style="padding: 15px;">
+Ball:
+</td>
+<td style="padding: 15px;">
+<!--
+<select id="ballDD">
+    <option value="0" selected>0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+</select>
+-->
+
+<div class="panel" id="b0" onclick='select_ball(this, "0");'>0</div>
+<div class="panel" id="b1" onclick='select_ball(this, "1");'>1</div>
+<div class="panel" id="b2" onclick='select_ball(this, "2");'>2</div></br>
+<div class="panel" id="b3" onclick='select_ball(this, "3");'>3</div>
+<div class="panel" id="b4" onclick='select_ball(this, "4");'>4</div>
+<div class="panel" id="b5" onclick='select_ball(this, "5");'>5</div></br>
+<input type="text" id="ball" name="ball" value="0" style="width: 30px; visibility: hidden;">
+</td>
+
+<td style="padding: 15px;">
+Wicket:
+</td>
+<td style="padding: 15px;">
+<!--
+<select id="wicketDD">
+    <option value="0" selected>0</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+</select>
+-->
+
+<div class="panel" id="w0" onclick='select_wick(this, "0");'>0</div>
+<div class="panel" id="w1" onclick='select_wick(this, "1");'>1</div>
+<div class="panel" id="w2" onclick='select_wick(this, "2");'>2</div>
+<div class="panel" id="w3" onclick='select_wick(this, "3");'>3</div></br>
+<div class="panel" id="w4" onclick='select_wick(this, "4");'>4</div>
+<div class="panel" id="w5" onclick='select_wick(this, "5");'>5</div>
+<div class="panel" id="w6" onclick='select_wick(this, "6");'>6</div>
+<div class="panel" id="w7" onclick='select_wick(this, "7");'>7</div><br/>
+<div class="panel" id="w8" onclick='select_wick(this, "8");'>8</div>
+<div class="panel" id="w9" onclick='select_wick(this, "9");'>9</div>
+<div class="panel" id="w10" onclick='select_wick(this, "10");'>10</div>
+<input type="text" id="wick" name="wick" value="0" style="width: 30px; visibility: hidden;">
+</td>
+
+<td style="padding: 15px;">
+ <button type="button" onclick="change_score()">Submit</button> 
+</td>
+<td style="padding: 15px;">
+ <button type="button" onclick="reset_score()">Reset</button> 
+</td>
+</tr>
+
+<tr>
+<td style="padding: 15px;">
+Target:
+</td>
+<td style="padding: 15px;">
+<input type="text" id="target" name="target">
+</td>
+<td style="padding: 15px;">
+<button type="button" onclick="change_target()">Set</button>
+</td>
+<td style="padding: 15px;">
+<button type="button" onclick="change_league()">Clear</button>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</html>
